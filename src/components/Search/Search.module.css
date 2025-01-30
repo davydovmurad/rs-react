@@ -1,0 +1,45 @@
+.inputWrapper {
+  margin-right: 15px;
+}
+
+input {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid #2f3542;
+  outline: none;
+  width: 250px;
+  color: #2f3542;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+input::placeholder {
+  color: #2f3542;
+}
+
+input:focus {
+  border-color: #1e90ff;
+}
+
+button {
+  padding: 12px 30px;
+  background-color: #2f3542;
+  color: #fef3c7;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #ff6348;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
