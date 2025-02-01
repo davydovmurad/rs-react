@@ -6,9 +6,8 @@ import {
   MouseEventHandler,
   ReactNode,
 } from 'react';
-import SearchButton from './SearchButton';
-import SearchInput from './SearchInput';
-import styles from './Search.module.css';
+import SearchButton from './SearchButton/SearchButton';
+import SearchInput from './SearchInput/SearchInput';
 
 const SEARCH_REQUEST_LOCAL_STORAGE_KEY: string = 'searchRequest';
 
@@ -42,12 +41,10 @@ export default class Search extends Component<
   render(): ReactNode {
     return (
       <>
-        <div className={styles.inputWrapper}>
-          <SearchInput
-            value={this.state.searchRequest}
-            onChange={this.handleSearchRequestChange}
-          />
-        </div>
+        <SearchInput
+          value={this.state.searchRequest}
+          onChange={this.handleSearchRequestChange}
+        />
         <SearchButton onClick={this.handleSearchRequestSubmit} />
       </>
     );

@@ -5,12 +5,7 @@
 }
 
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: sans-serif;
   background-color: #fef3c7;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 0;
-  padding-top: 30px;
+  padding: 30px 120px 0;
 }
