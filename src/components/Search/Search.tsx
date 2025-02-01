@@ -2,21 +2,19 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   Component,
-  ComponentProps,
   MouseEventHandler,
   ReactNode,
 } from 'react';
 import SearchButton from './SearchButton/SearchButton';
 import SearchInput from './SearchInput/SearchInput';
-
-const SEARCH_REQUEST_LOCAL_STORAGE_KEY: string = 'searchRequest';
+import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from '../../consts';
 
 interface SearchState {
   searchRequest: string;
 }
 
 export default class Search extends Component<
-  ComponentProps<'div'>,
+  { updateNameFilter: (name: string | null) => void },
   SearchState
 > {
   state: SearchState = {
@@ -33,10 +31,12 @@ export default class Search extends Component<
 
   handleSearchRequestSubmit: MouseEventHandler<HTMLButtonElement> =
     (): void => {
-      localStorage.setItem(
-        SEARCH_REQUEST_LOCAL_STORAGE_KEY,
-        this.state.searchRequest
-      );
+      const searchRequest = this.state.searchRequest.trim();
+      localStorage.setItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY, searchRequest);
+      this.setState({
+        searchRequest: searchRequest,
+      });
+      this.props.updateNameFilter(searchRequest);
     };
 
   render(): ReactNode {
