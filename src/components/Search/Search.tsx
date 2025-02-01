@@ -25,18 +25,19 @@ export default class Search extends Component<
 
   handleSearchRequestChange: ChangeEventHandler<HTMLInputElement> = (
     e: ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     this.setState({
       searchRequest: e.target.value,
     });
   };
 
-  handleSearchRequestSubmit: MouseEventHandler<HTMLButtonElement> = () => {
-    localStorage.setItem(
-      SEARCH_REQUEST_LOCAL_STORAGE_KEY,
-      this.state.searchRequest
-    );
-  };
+  handleSearchRequestSubmit: MouseEventHandler<HTMLButtonElement> =
+    (): void => {
+      localStorage.setItem(
+        SEARCH_REQUEST_LOCAL_STORAGE_KEY,
+        this.state.searchRequest
+      );
+    };
 
   render(): ReactNode {
     return (
