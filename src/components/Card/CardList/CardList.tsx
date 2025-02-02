@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
 import Card from '../Card/Card';
 import { Pokemon } from '../../../models';
-import './CardList.module.css';
+import './CardList.css';
 
 export default class CardList extends Component<{
   pokemons: Pokemon[];

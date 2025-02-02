@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 import Search from '../Search/Search';
-import './Header.module.css';
+import './Header.css';
 
 export default class Header extends Component<{
   updateNameFilter: (name: string | null) => void;
