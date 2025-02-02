@@ -40,6 +40,9 @@ export default class Main extends Component<
     if (prevProps.nameFilter === this.props.nameFilter) {
       return;
     }
+    this.setState({
+      isLoading: true,
+    });
     await this.componentDidMount();
   }
 
