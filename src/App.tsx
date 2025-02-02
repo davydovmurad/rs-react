@@ -5,11 +5,11 @@ import ErrorButton from './components/ErrorButton';
 import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from './consts';
 import './App.css';
 
-class App extends Component<
-  ComponentProps<'div'>,
-  { nameFilter: string | null }
-> {
-  state = {
+interface AppState {
+  nameFilter: string | null;
+}
+class App extends Component<ComponentProps<'div'>, AppState> {
+  state: AppState = {
     nameFilter: localStorage.getItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY),
   };
 
