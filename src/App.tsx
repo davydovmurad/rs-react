@@ -1,6 +1,7 @@
 import { Component, ComponentProps, ReactNode } from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
+import ErrorButton from './components/ErrorButton';
 import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from './consts';
 import './App.css';
 
@@ -21,6 +22,7 @@ class App extends Component<
       <>
         <Header updateNameFilter={this.updateNameFilter} />
         <Main nameFilter={this.state.nameFilter} />
+        <ErrorButton />
       </>
     );
   }
