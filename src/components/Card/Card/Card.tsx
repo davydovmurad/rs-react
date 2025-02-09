@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import styles from './Card.module.css';
 
 type CardProps = {
@@ -5,9 +6,13 @@ type CardProps = {
   description: string;
 };
 
-export default function Card({ name, description }: CardProps) {
+export default function Card({
+  name,
+  description,
+  onClick,
+}: CardProps & ComponentProps<'tr'>) {
   return (
-    <tr>
+    <tr onClick={onClick}>
       <td className={styles.name}>{name}</td>
       <td>{description}</td>
     </tr>

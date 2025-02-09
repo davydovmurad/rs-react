@@ -72,6 +72,9 @@ export default class PokemonApiService {
       pokemons.push({ name: pokemon.name, description: texts.join(' ') });
     }
 
-    return { count: pokemonResponseData.count, pokemons: pokemons };
+    return {
+      count: nameFilter ? 0 : pokemonResponseData.count,
+      pokemons: pokemons,
+    };
   }
 }
