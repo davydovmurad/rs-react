@@ -1,53 +1,35 @@
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  Component,
-  MouseEventHandler,
-  ReactNode,
-} from 'react';
+import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
 import SearchButton from './SearchButton/SearchButton';
 import SearchInput from './SearchInput/SearchInput';
 import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from '../../consts';
+import useSearchRequest from '../../hooks/useSearchRequest';
 
-interface SearchState {
-  searchRequest: string;
-}
+export type SearchProps = {
+  updateNameFilter: (name: string) => void;
+};
 
-export default class Search extends Component<
-  { updateNameFilter: (name: string | null) => void },
-  SearchState
-> {
-  state: SearchState = {
-    searchRequest: localStorage.getItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY) || '',
-  };
+export default function Search({ updateNameFilter }: SearchProps) {
+  const [searchRequest, setSearchRequest] = useSearchRequest();
 
-  handleSearchRequestChange: ChangeEventHandler<HTMLInputElement> = (
+  const handleSearchRequestChange: ChangeEventHandler<HTMLInputElement> = (
     e: ChangeEvent<HTMLInputElement>
   ): void => {
-    this.setState({
-      searchRequest: e.target.value,
-    });
+    setSearchRequest(e.target.value);
   };
 
-  handleSearchRequestSubmit: MouseEventHandler<HTMLButtonElement> =
-    (): void => {
-      const searchRequest = this.state.searchRequest.trim();
-      localStorage.setItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY, searchRequest);
-      this.setState({
-        searchRequest: searchRequest,
-      });
-      this.props.updateNameFilter(searchRequest);
-    };
+  const handleSearchRequestSubmit: MouseEventHandler<
+    HTMLButtonElement
+  > = (): void => {
+    const searchRequestTrim = searchRequest.trim();
+    localStorage.setItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY, searchRequestTrim);
+    setSearchRequest(searchRequestTrim);
+    updateNameFilter(searchRequestTrim);
+  };
 
-  render(): ReactNode {
-    return (
-      <>
-        <SearchInput
-          value={this.state.searchRequest}
-          onChange={this.handleSearchRequestChange}
-        />
-        <SearchButton onClick={this.handleSearchRequestSubmit} />
-      </>
-    );
-  }
+  return (
+    <>
+      <SearchInput value={searchRequest} onChange={handleSearchRequestChange} />
+      <SearchButton onClick={handleSearchRequestSubmit} />
+    </>
+  );
 }

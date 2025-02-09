@@ -1,31 +1,16 @@
-import { Component, ComponentProps, ReactNode } from 'react';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import ErrorButton from './components/ErrorButton';
-import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from './consts';
+import { Route, Routes } from 'react-router';
+import Pokemons from './pages/Pokemons';
+import PokemonDetails from './pages/PokemonDetails/PokemonDetails';
+import NoFound from './pages/NotFound/NotFound';
 import './App.css';
 
-interface AppState {
-  nameFilter: string | null;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Pokemons />}>
+        <Route path="details" element={<PokemonDetails />} />
+      </Route>
+      <Route path="*" element={<NoFound />} />
+    </Routes>
+  );
 }
-class App extends Component<ComponentProps<'div'>, AppState> {
-  state: AppState = {
-    nameFilter: localStorage.getItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY),
-  };
-
-  updateNameFilter = (nameFilter: string | null): void => {
-    this.setState({ nameFilter });
-  };
-
-  render(): ReactNode {
-    return (
-      <>
-        <Header updateNameFilter={this.updateNameFilter} />
-        <Main nameFilter={this.state.nameFilter} />
-        <ErrorButton />
-      </>
-    );
-  }
-}
-
-export default App;

@@ -1,10 +1,23 @@
+import { PAGINATION_LIMIT } from './consts';
 import { Pokemon } from './models';
 
-interface PokemonResponseData {
+export interface PokemonsData {
+  count: number;
+  pokemons: Pokemon[];
+}
+
+interface PokemonsListResponseData {
   count: number;
   next: string | null;
   previous: string | null;
   results: { name: string; url: string }[];
+}
+
+interface PokemonResponseData {
+  species: {
+    name: string;
+    url: string;
+  };
 }
 
 interface PokemonSpeciesResponseData {
@@ -18,14 +31,17 @@ export default class PokemonApiService {
   private BASE_URL: string = 'https://pokeapi.co/api/v2';
 
   async getPokemons(
-    nameFilter: string | null = null
-  ): Promise<Pokemon[] | undefined> {
+    nameFilter: string | null = null,
+    offset: number = 0
+  ): Promise<PokemonsData | undefined> {
     const pokemons: Pokemon[] = [];
-    const response: Response = await fetch(this.BASE_URL + '/pokemon');
+    const response: Response = await fetch(
+      `${this.BASE_URL}/pokemon?limit=${PAGINATION_LIMIT}&offset=${offset}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const pokemonResponseData: PokemonResponseData = await response.json();
+    const pokemonResponseData: PokemonsListResponseData = await response.json();
     let pokemonsData = pokemonResponseData.results;
 
     if (nameFilter) {
@@ -35,12 +51,15 @@ export default class PokemonApiService {
     }
 
     for (const pokemon of pokemonsData) {
-      const name = pokemon.name;
-      const response: Response = await fetch(
-        this.BASE_URL + '/pokemon-species/' + name
+      const pokemonResponse: Response = await fetch(pokemon.url);
+      const pokemonResponseData: PokemonResponseData =
+        await pokemonResponse.json();
+      const pokemonSpeciesResponse: Response = await fetch(
+        pokemonResponseData.species.url
       );
 
-      const pokemonSpecies: PokemonSpeciesResponseData = await response.json();
+      const pokemonSpecies: PokemonSpeciesResponseData =
+        await pokemonSpeciesResponse.json();
       const texts: string[] = [];
 
       pokemonSpecies.flavor_text_entries.forEach((spec) => {
@@ -50,9 +69,12 @@ export default class PokemonApiService {
         }
         texts.push(text);
       });
-      pokemons.push({ name: name, description: texts.join(' ') });
+      pokemons.push({ name: pokemon.name, description: texts.join(' ') });
     }
 
-    return pokemons;
+    return {
+      count: nameFilter ? 0 : pokemonResponseData.count,
+      pokemons: pokemons,
+    };
   }
 }
