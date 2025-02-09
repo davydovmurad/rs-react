@@ -1,32 +1,20 @@
-import { Component, ComponentProps, MouseEventHandler, ReactNode } from 'react';
+import { ComponentProps, MouseEventHandler, useState } from 'react';
 
-interface ErrorButtonState {
-  error: boolean;
-}
+export default function ErrorButton(props: ComponentProps<'button'>) {
+  const [error, setError] = useState<boolean>(false);
 
-export default class ErrorButton extends Component<
-  ComponentProps<'button'>,
-  ErrorButtonState
-> {
-  state: ErrorButtonState = { error: false };
-  handleOnClick: MouseEventHandler<HTMLButtonElement> = (): void => {
-    this.setState({ error: true });
+  const handleOnClick: MouseEventHandler<HTMLButtonElement> = (): void => {
+    setError(true);
   };
 
-  render(): ReactNode {
-    if (this.state.error) {
-      throw Error('Test error');
-    }
-    return (
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <button
-          style={{ margin: '30px 0' }}
-          onClick={this.handleOnClick}
-          {...this.props}
-        >
-          Error button
-        </button>
-      </div>
-    );
+  if (error) {
+    throw Error('Test error');
   }
+  return (
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <button style={{ margin: '30px 0' }} onClick={handleOnClick} {...props}>
+        Error button
+      </button>
+    </div>
+  );
 }

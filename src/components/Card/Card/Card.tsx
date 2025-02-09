@@ -1,16 +1,15 @@
-import { Component, ReactNode } from 'react';
 import styles from './Card.module.css';
 
-export default class Card extends Component<{
+type CardProps = {
   name: string;
   description: string;
-}> {
-  render(): ReactNode {
-    return (
-      <tr>
-        <td className={styles.name}>{this.props.name}</td>
-        <td>{this.props.description}</td>
-      </tr>
-    );
-  }
+};
+
+export default function Card({ name, description }: CardProps) {
+  return (
+    <tr>
+      <td className={styles.name}>{name}</td>
+      <td>{description}</td>
+    </tr>
+  );
 }

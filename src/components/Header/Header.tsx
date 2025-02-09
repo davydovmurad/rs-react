@@ -1,15 +1,10 @@
-import { Component, ReactNode } from 'react';
-import Search from '../Search/Search';
+import Search, { SearchProps } from '../Search/Search';
 import './Header.css';
 
-export default class Header extends Component<{
-  updateNameFilter: (name: string | null) => void;
-}> {
-  render(): ReactNode {
-    return (
-      <header>
-        <Search updateNameFilter={this.props.updateNameFilter} />
-      </header>
-    );
-  }
+export default function Header({ updateNameFilter }: SearchProps) {
+  return (
+    <header>
+      <Search updateNameFilter={updateNameFilter} />
+    </header>
+  );
 }
