@@ -1,17 +1,13 @@
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import ErrorButton from './components/ErrorButton';
+import { Route, Routes } from 'react-router';
+import Pokemons from './pages/Pokemons';
+import NoFound from './pages/NotFound/NotFound';
 import './App.css';
-import useSearchRequest from './hooks/useSearchRequest';
 
 export default function App() {
-  const [nameFilter, setNameFilter] = useSearchRequest();
-
   return (
-    <>
-      <Header updateNameFilter={setNameFilter} />
-      <Main nameFilter={nameFilter} />
-      <ErrorButton />
-    </>
+    <Routes>
+      <Route path="/" element={<Pokemons />} />
+      <Route path="*" element={<NoFound />} />
+    </Routes>
   );
 }
