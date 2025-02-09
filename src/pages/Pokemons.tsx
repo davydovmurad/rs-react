@@ -44,10 +44,10 @@ export default function Pokemons() {
           offset
         );
         setPokemonsData(pokemons || { count: 0, pokemons: [] });
+        setIsLoading(false);
       } catch (error) {
         setError(String(error));
       }
-      setIsLoading(false);
     };
 
     fetchPokemons();
