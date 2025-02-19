@@ -22,9 +22,12 @@ export const pokemonsSlice = createSlice({
         (pokemon) => pokemon.name != action.payload.name
       );
     },
+    clear: (state) => {
+      state.list = [];
+    },
   },
 });
 
-export const { add, remove } = pokemonsSlice.actions;
+export const { add, remove, clear } = pokemonsSlice.actions;
 
 export default pokemonsSlice.reducer;

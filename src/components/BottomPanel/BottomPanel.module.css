@@ -1,0 +1,18 @@
+.bottomPanel {
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid red;
+  border-radius: 10px;
+}
+
+.bottomPanel p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.bottomPanel button:last-child {
+  margin-left: 20px;
+}

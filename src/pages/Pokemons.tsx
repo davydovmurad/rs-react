@@ -3,15 +3,19 @@ import { Outlet, useNavigate, useSearchParams } from 'react-router';
 import ErrorButton from '../components/ErrorButton';
 import Header from '../components/Header/Header';
 import Main from '../components/Main/Main';
+import BottomPanel from '../components/BottomPanel/BottomPanel';
 import useSearchRequest from '../hooks/useSearchRequest';
 import PokemonApiService, { PokemonsData } from '../api';
 import { PAGINATION_LIMIT } from '../consts';
 import { Pokemon } from '../models';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const PAGE_PARAM: string = 'page';
 const DETAILS_PARAM: string = 'details';
 
 export default function Pokemons() {
+  const pokemons = useSelector((state: RootState) => state.pokemons.list);
   const [nameFilter, setNameFilter] = useSearchRequest();
   const [pokemonsData, setPokemonsData] = useState<PokemonsData>({
     count: 0,
@@ -71,6 +75,7 @@ export default function Pokemons() {
         page={pageParam}
         onClick={handleCloseClick}
       />
+      {pokemons.length > 0 && <BottomPanel />}
       <Outlet
         context={{
           name: detailsPokemon?.name || '',
