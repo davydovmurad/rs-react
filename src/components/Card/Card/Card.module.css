@@ -8,3 +8,8 @@ tr:hover td {
   background-color: #ffcc00 !important;
   cursor: pointer;
 }
+
+input[type='checkbox'] {
+  width: 30px;
+  height: 30px;
+}

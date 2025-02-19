@@ -34,6 +34,7 @@ export default function CardList({
       <table>
         <thead onClick={onClick}>
           <tr>
+            <th>Checkbox</th>
             <th>Pokémon Name</th>
             <th>Desription</th>
           </tr>
