@@ -1,43 +1,49 @@
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import NoFound from '../../pages/NotFound/NotFound';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router';
+import NotFound from '../../pages/NotFound/NotFound';
 
-describe('NoFound Component', () => {
-  it('should render the 404 heading', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <NoFound />
-      </MemoryRouter>
+describe('NotFound', () => {
+  it('renders 404 heading', () => {
+    render(
+      <BrowserRouter>
+        <NotFound />
+      </BrowserRouter>
     );
-    expect(getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
   });
 
-  it('should render the description', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <NoFound />
-      </MemoryRouter>
+  it('renders error message', () => {
+    render(
+      <BrowserRouter>
+        <NotFound />
+      </BrowserRouter>
     );
     expect(
-      getByText("Oops! Looks like you're lost in the wild!")
+      screen.getByText("Oops! Looks like you're lost in the wild!")
     ).toBeInTheDocument();
   });
 
-  it('should render the Pikachu image', () => {
-    const { getByAltText } = render(
-      <MemoryRouter>
-        <NoFound />
-      </MemoryRouter>
+  it('renders Pikachu image', () => {
+    render(
+      <BrowserRouter>
+        <NotFound />
+      </BrowserRouter>
     );
-    expect(getByAltText('Pikachu')).toBeInTheDocument();
+    const image = screen.getByAltText('Pikachu');
+    expect(image).toBeInTheDocument();
+    expect(image.tagName).toBe('IMG');
   });
 
-  it('should render the Go Back Home link', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <NoFound />
-      </MemoryRouter>
+  it('renders home link', () => {
+    render(
+      <BrowserRouter>
+        <NotFound />
+      </BrowserRouter>
     );
-    expect(getByText('Go Back Home')).toBeInTheDocument();
+    const link = screen.getByText('Go Back Home');
+    expect(link).toBeInTheDocument();
+    expect(link.tagName).toBe('A');
+    expect(link).toHaveAttribute('href', '/');
   });
 });

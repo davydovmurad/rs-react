@@ -4,10 +4,12 @@ import { Pokemon } from '../models';
 
 export interface PokemonsState {
   list: Pokemon[];
+  nameFilter: string;
 }
 
 const initialState: PokemonsState = {
   list: [],
+  nameFilter: '',
 };
 
 export const pokemonsSlice = createSlice({
@@ -25,9 +27,12 @@ export const pokemonsSlice = createSlice({
     clear: (state) => {
       state.list = [];
     },
+    updateNameFilter: (state, action: PayloadAction<string>) => {
+      state.nameFilter = action.payload;
+    },
   },
 });
 
-export const { add, remove, clear } = pokemonsSlice.actions;
+export const { add, remove, clear, updateNameFilter } = pokemonsSlice.actions;
 
 export default pokemonsSlice.reducer;

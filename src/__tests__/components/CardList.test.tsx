@@ -1,45 +1,48 @@
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import CardList from '../../components/Card/CardList/CardList';
-import '@testing-library/jest-dom';
-import { describe, expect, it } from 'vitest';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import setupStore from '../../store/store';
+import CardList from '../../components/Card/CardList/CardList';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
-const mockPokemons = [
-  { name: 'Pikachu', description: 'Electric mouse Pokémon' },
-  { name: 'Bulbasaur', description: 'Seed Pokémon' },
-];
+const mockNavigate = vi.fn();
+vi.mock('react-router', () => ({
+  useNavigate: () => mockNavigate,
+  useSearchParams: () => [new URLSearchParams({ page: '1' }), vi.fn()],
+}));
 
-describe('CardList Component', () => {
-  it('renders a table with pokemon data when pokemons array is not empty', () => {
-    render(
-      <BrowserRouter>
-        <CardList total={2} pokemons={mockPokemons} page={1} />
-      </BrowserRouter>
+describe('CardList', () => {
+  const store = setupStore;
+  setupListeners(store.dispatch);
+
+  const mockSetDetailsPokemon = vi.fn();
+
+  const renderCardList = () => {
+    return render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <CardList setDetailsPokemon={mockSetDetailsPokemon} />
+        </BrowserRouter>
+      </Provider>
     );
-    expect(screen.getByRole('table')).toBeInTheDocument();
-    expect(screen.getByText('Pokémon Name')).toBeInTheDocument();
-    expect(screen.getByText('Desription')).toBeInTheDocument();
-    expect(screen.getByText('Pikachu')).toBeInTheDocument();
-    expect(screen.getByText('Electric mouse Pokémon')).toBeInTheDocument();
-    expect(screen.getByText('Bulbasaur')).toBeInTheDocument();
-    expect(screen.getByText('Seed Pokémon')).toBeInTheDocument();
+  };
+
+  test('displays table headers correctly', async () => {
+    renderCardList();
+    const headers = ['Checkbox', 'Pokémon Name', 'Desription'];
+    headers.forEach(async (header) => {
+      const headerElement = await screen.findByText(header);
+      expect(headerElement).toBeInTheDocument();
+    });
   });
 
-  it('renders Pagination component when total is greater than 0', () => {
-    render(
-      <BrowserRouter>
-        <CardList total={20} pokemons={mockPokemons} page={1} />
-      </BrowserRouter>
+  test('displays error message on fetch failure', async () => {
+    vi.spyOn(global, 'fetch').mockRejectedValueOnce(
+      new Error('Failed to fetch')
     );
-  });
-
-  it('does not render Pagination component when total is 0', () => {
-    render(
-      <BrowserRouter>
-        <CardList total={0} pokemons={mockPokemons} page={1} />
-      </BrowserRouter>
-    );
-    const pagination = screen.queryByRole('navigation');
-    expect(pagination).toBeNull();
+    renderCardList();
+    const errorMessage = await screen.findByText('Failed to fetch');
+    expect(errorMessage).toBeInTheDocument();
   });
 });

@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react';
-import styles from './Card.module.css';
-import { add, remove } from '../../../store/pokemonSlice';
-import { Pokemon } from '../../../models';
-import { RootState } from '../../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { add, remove } from '../../../store/pokemonSlice';
+import { RootState } from '../../../store/store';
+import { Pokemon } from '../../../models';
+import styles from './Card.module.css';
 
 type CardProps = {
   name: string;

@@ -1,70 +1,52 @@
-import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Pagination from '../../ui/Pagination/Pagination';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
+import { PAGINATION_LIMIT } from '../../consts';
 
-describe('Pagination Component', () => {
-  it('renders pagination links correctly when on the first page', () => {
-    render(
+describe('Pagination', () => {
+  const renderWithRouter = (total: number, page: number) => {
+    return render(
       <MemoryRouter>
-        <Pagination total={30} page={1} />
+        <Pagination total={total} page={page} />
       </MemoryRouter>
     );
+  };
 
-    expect(screen.getByText('←')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
-    expect(screen.getByText('3')).toBeInTheDocument();
-    expect(screen.getByText('→')).toBeInTheDocument();
+  it('should render first page correctly', () => {
+    renderWithRouter(30, 1);
+
+    expect(screen.getByText('1')).toHaveClass(/_link/);
+    expect(screen.getByText('←').closest('li')).toHaveClass(/_disabled/);
+    expect(screen.getAllByRole('listitem')).toHaveLength(5);
   });
 
-  it('renders pagination links correctly when on the last page', () => {
-    render(
-      <MemoryRouter>
-        <Pagination total={30} page={10} />
-      </MemoryRouter>
-    );
+  it('should render middle page correctly', () => {
+    renderWithRouter(50, 3);
 
-    expect(screen.getByText('←')).toBeInTheDocument();
-    expect(screen.getByText('9')).toBeInTheDocument();
-    expect(screen.getByText('10')).toBeInTheDocument();
-    expect(screen.getByText('11')).toBeInTheDocument();
-    expect(screen.getByText('→')).toBeInTheDocument();
+    const pages = screen.getAllByRole('listitem').slice(1, -1);
+    expect(pages).toHaveLength(3);
+    expect(pages[0]).toHaveTextContent('2');
+    expect(pages[1]).toHaveTextContent('3');
+    expect(pages[2]).toHaveTextContent('4');
   });
 
-  it('renders pagination links correctly when on a middle page', () => {
-    render(
-      <MemoryRouter>
-        <Pagination total={30} page={5} />
-      </MemoryRouter>
-    );
+  it('should render last page correctly', () => {
+    const total = 30;
+    const lastPage = Math.ceil(total / PAGINATION_LIMIT);
+    renderWithRouter(total, lastPage);
 
-    expect(screen.getByText('←')).toBeInTheDocument();
-    expect(screen.getByText('4')).toBeInTheDocument();
-    expect(screen.getByText('5')).toBeInTheDocument();
-    expect(screen.getByText('6')).toBeInTheDocument();
-    expect(screen.getByText('→')).toBeInTheDocument();
+    expect(screen.getByText('→').closest('li')).toHaveClass(/_disabled/);
+    expect(screen.getByText(String(lastPage))).toHaveClass(/_link/);
   });
 
-  it('disables the previous button when on the first page', () => {
-    render(
-      <MemoryRouter>
-        <Pagination total={30} page={1} />
-      </MemoryRouter>
+  it('should have correct navigation links', () => {
+    renderWithRouter(50, 2);
+
+    expect(screen.getByText('←')).toHaveAttribute('href', '/?page=1');
+    expect(screen.getByText('→')).toHaveAttribute(
+      'href',
+      `/?page=${Math.ceil(50 / PAGINATION_LIMIT)}`
     );
-
-    const prevButton = screen.getByText('←').closest('li');
-    expect(prevButton).toHaveClass('_prev_81b0bf');
-  });
-
-  it('disables the next button when on the last page', () => {
-    render(
-      <MemoryRouter>
-        <Pagination total={30} page={10} />
-      </MemoryRouter>
-    );
-
-    const nextButton = screen.getByText('→').closest('li');
-    expect(nextButton).toHaveClass('_next_81b0bf');
   });
 });

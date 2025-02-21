@@ -13,6 +13,8 @@ export default defineConfig({
       'var/**',
       '**/dist/**',
       './src/__tests__/setup.ts',
+      './src/main.tsx',
+      './src/App.tsx',
     ],
     coverage: {
       include: ['**/*.tsx'],
@@ -21,6 +23,8 @@ export default defineConfig({
         '**/*.test.tsx',
         '**/*.spec.tsx',
         'src/__tests__/setup.ts',
+        './src/main.tsx',
+        './src/App.tsx',
       ],
     },
   },

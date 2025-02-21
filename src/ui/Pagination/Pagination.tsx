@@ -20,42 +20,50 @@ export default function Pagination({ total, page }: PaginationProps) {
   }
 
   return (
-    <>
-      <div className={styles.paginationContainer}>
-        <ul className={styles.pagination}>
-          <li
-            className={
-              page === 1
-                ? [styles.prev, styles.disabled].join(' ')
-                : styles.prev
-            }
+    <div className={styles.paginationContainer}>
+      <ul className={styles.pagination}>
+        <li
+          className={
+            page === 1 ? [styles.prev, styles.disabled].join(' ') : styles.prev
+          }
+        >
+          <Link
+            to="/?page=1"
+            className={styles.link}
+            onClick={(e) => e.stopPropagation()}
           >
-            <Link to="/?page=1" className={styles.link}>
-              ←
+            ←
+          </Link>
+        </li>
+
+        {numLinkList.map((num) => (
+          <li key={num} className={num === page ? styles.active : ''}>
+            <Link
+              to={`/?page=${num}`}
+              className={styles.link}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {num}
             </Link>
           </li>
+        ))}
 
-          {numLinkList.map((num) => (
-            <li key={num} className={num === page ? styles.active : ''}>
-              <Link to={`/?page=${num}`} className={styles.link}>
-                {num}
-              </Link>
-            </li>
-          ))}
-
-          <li
-            className={
-              page === pagesCount
-                ? [styles.next, styles.disabled].join(' ')
-                : styles.next
-            }
+        <li
+          className={
+            page === pagesCount
+              ? [styles.next, styles.disabled].join(' ')
+              : styles.next
+          }
+        >
+          <Link
+            to={`/?page=${pagesCount}`}
+            className={styles.link}
+            onClick={(e) => e.stopPropagation()}
           >
-            <Link to={`/?page=${pagesCount}`} className={styles.link}>
-              →
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </>
+            →
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 }
