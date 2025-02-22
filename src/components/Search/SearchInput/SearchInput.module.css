@@ -2,7 +2,7 @@
   margin-right: 15px;
 }
 
-input {
+.input {
   padding: 12px 20px;
   font-size: 18px;
   border-radius: 8px;
@@ -14,10 +14,19 @@ input {
   transition: border-color 0.3s ease;
 }
 
-input::placeholder {
+.input::placeholder {
   color: #2f3542;
 }
 
-input:focus {
+.input:focus {
   border-color: #1e90ff;
+}
+
+.input.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.input.dark::placeholder {
+  color: #fff;
 }

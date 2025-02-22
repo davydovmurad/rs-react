@@ -27,6 +27,11 @@
   animation-duration: 0.5s;
 }
 
+.container.dark {
+  background: #6a6a6a;
+  color: lightcyan;
+}
+
 .heading {
   margin-bottom: 10px;
 }

@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './BottomPanel.module.css';
+import ThemeContext from '../../context/ThemeContext';
 import { RootState } from '../../store/store';
 import { clear } from '../../store/pokemonSlice';
+import styles from './BottomPanel.module.css';
 
 export default function BottomPanel() {
   const pokemons = useSelector((state: RootState) => state.pokemons.list);
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   const unselectAll = (): void => {
@@ -32,7 +35,7 @@ export default function BottomPanel() {
   };
 
   return (
-    <div className={styles.bottomPanel}>
+    <div className={[styles.bottomPanel, styles[theme]].join(' ')}>
       <p>{pokemons.length} pokemon(s) are selected</p>
       <button onClick={unselectAll}>Unselect all</button>
       <button onClick={downloadCSV}>Download</button>

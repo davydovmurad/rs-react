@@ -7,6 +7,10 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+.paginationContainer.dark {
+  background-color: #6a6a6a;
+}
+
 .pagination {
   display: flex;
   justify-content: center;

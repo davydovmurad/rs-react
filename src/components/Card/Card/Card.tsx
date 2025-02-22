@@ -1,5 +1,6 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ThemeContext from '../../../context/ThemeContext';
 import { add, remove } from '../../../store/pokemonSlice';
 import { RootState } from '../../../store/store';
 import { Pokemon } from '../../../models';
@@ -16,6 +17,7 @@ export default function Card({
   onClick,
 }: CardProps & ComponentProps<'tr'>) {
   const pokemons = useSelector((state: RootState) => state.pokemons.list);
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   const handleCheckbox: React.ChangeEventHandler<HTMLInputElement> = (
@@ -33,7 +35,7 @@ export default function Card({
   const pokemonNames = pokemons.map((pokemon) => pokemon.name);
 
   return (
-    <tr onClick={onClick}>
+    <tr onClick={onClick} className={styles[theme]}>
       <td>
         <input
           type="checkbox"

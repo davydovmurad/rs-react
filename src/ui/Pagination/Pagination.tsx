@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { PAGINATION_LIMIT } from '../../consts';
-import styles from './Pagination.module.css';
+import ThemeContext from '../../context/ThemeContext';
 import { Link } from 'react-router';
+import styles from './Pagination.module.css';
 
 type PaginationProps = {
   total: number;
@@ -8,6 +10,7 @@ type PaginationProps = {
 };
 
 export default function Pagination({ total, page }: PaginationProps) {
+  const theme = useContext(ThemeContext);
   const pagesCount: number = Math.ceil(total / PAGINATION_LIMIT);
   let numLinkList: number[];
 
@@ -20,7 +23,7 @@ export default function Pagination({ total, page }: PaginationProps) {
   }
 
   return (
-    <div className={styles.paginationContainer}>
+    <div className={[styles.paginationContainer, styles[theme]].join(' ')}>
       <ul className={styles.pagination}>
         <li
           className={
