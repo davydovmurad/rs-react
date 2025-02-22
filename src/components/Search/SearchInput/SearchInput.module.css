@@ -1,0 +1,32 @@
+.inputWrapper {
+  margin-right: 15px;
+}
+
+.input {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid #2f3542;
+  outline: none;
+  width: auto;
+  color: #2f3542;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+.input::placeholder {
+  color: #2f3542;
+}
+
+.input:focus {
+  border-color: #1e90ff;
+}
+
+.input.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.input.dark::placeholder {
+  color: #fff;
+}

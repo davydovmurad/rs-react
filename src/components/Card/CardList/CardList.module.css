@@ -1,0 +1,40 @@
+.cardList {
+  margin-top: 30px;
+  text-align: center;
+}
+
+table {
+  margin-top: 30px;
+  border-collapse: collapse;
+  background-color: #ffcb05;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+th {
+  background-color: #ee1515;
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  background-color: #fff;
+  border: 2px solid #ffcb05;
+  color: #333;
+}
+
+tr:nth-child(even) td {
+  background-color: #f3f3f3;
+}
+
+.msg {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 30px;
+}
