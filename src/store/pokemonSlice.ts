@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Pokemon } from '../models';
+import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from '../consts';
 
 export interface PokemonsState {
   list: Pokemon[];
@@ -9,7 +10,7 @@ export interface PokemonsState {
 
 const initialState: PokemonsState = {
   list: [],
-  nameFilter: '',
+  nameFilter: localStorage.getItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY) || '',
 };
 
 export const pokemonsSlice = createSlice({
