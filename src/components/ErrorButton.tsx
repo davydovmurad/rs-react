@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentProps, MouseEventHandler, useState } from 'react';
 
 export default function ErrorButton(props: ComponentProps<'button'>) {

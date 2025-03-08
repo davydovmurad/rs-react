@@ -1,18 +1,14 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { useRouter } from 'next/router';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { vi, Mock } from 'vitest';
 import configureStore from 'redux-mock-store';
 import CardList from '@/components/Card/CardList/CardList';
 import { RootState } from '@/store/store';
 import { useGetAllPokemonsQuery } from '@/services/pokemon';
 
-vi.mock('next/router', () => ({
-  useRouter: vi.fn(),
-}));
-
 vi.mock('next/navigation', () => ({
+  useRouter: vi.fn(),
   usePathname: vi.fn(),
   useSearchParams: vi.fn(),
 }));

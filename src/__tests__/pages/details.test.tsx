@@ -1,20 +1,17 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Mock, vi } from 'vitest';
 import store from '@/store/store';
 import ThemeContext from '@/context/ThemeContext';
-import PokemonDetails from '../../pages/details';
-
-vi.mock('next/router', () => ({
-  useRouter: vi.fn(),
-}));
+import PokemonDetails from '../../app/details/page';
 
 vi.mock('next/navigation', () => ({
   useSearchParams: () => ({
     get: vi.fn().mockReturnValue('1'),
   }),
   usePathname: vi.fn(),
+  useRouter: vi.fn(),
 }));
 
 describe('PokemonDetails Page', () => {

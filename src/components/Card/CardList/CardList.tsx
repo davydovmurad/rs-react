@@ -1,7 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { setDetailsPokemon } from '@/store/pokemonSlice';
 import { useGetAllPokemonsQuery } from '@/services/pokemon';

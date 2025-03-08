@@ -1,7 +1,8 @@
+'use client';
+
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { RootState } from '../../store/store';
 import ThemeContext from '../../context/ThemeContext';
 import PokemonsLayout from '../../components/PokemonsLayout';
