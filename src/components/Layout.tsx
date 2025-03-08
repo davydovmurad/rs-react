@@ -6,7 +6,7 @@ import ThemeContext, { ThemeEnum } from '@/context/ThemeContext';
 import ThemeSwitcher from '@/components/ui/ThemeSwitcher/ThemeSwitcher';
 import { THEME_LOCAL_STORAGE_KEY } from '../consts';
 
-export default function MyApp({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   let initTheme: ThemeEnum | string = ThemeEnum.LIGHT;
 
   if (typeof window !== 'undefined') {
