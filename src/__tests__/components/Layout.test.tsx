@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import MyApp from '@/components/Layout';
+import Layout from '@/components/Layout';
 import { ThemeEnum } from '@/context/ThemeContext';
 import { THEME_LOCAL_STORAGE_KEY } from '../../consts';
 
-describe('MyApp Component', () => {
+describe('Layout Component', () => {
   beforeEach(() => {
     localStorage.clear();
     document.body.style.backgroundColor = '';
@@ -11,9 +11,9 @@ describe('MyApp Component', () => {
 
   it('should render children', () => {
     render(
-      <MyApp>
+      <Layout>
         <div>Test Child</div>
-      </MyApp>
+      </Layout>
     );
     expect(screen.getByText('Test Child')).toBeInTheDocument();
   });
@@ -21,25 +21,25 @@ describe('MyApp Component', () => {
   it('should initialize theme from localStorage if available', () => {
     localStorage.setItem(THEME_LOCAL_STORAGE_KEY, ThemeEnum.DARK);
     render(
-      <MyApp>
+      <Layout>
         <div>Test Child</div>
-      </MyApp>
+      </Layout>
     );
   });
 
   it('should initialize theme to light if localStorage is empty', () => {
     render(
-      <MyApp>
+      <Layout>
         <div>Test Child</div>
-      </MyApp>
+      </Layout>
     );
   });
 
   it('should set background color based on theme', async () => {
     render(
-      <MyApp>
+      <Layout>
         <div>Test Child</div>
-      </MyApp>
+      </Layout>
     );
 
     await waitFor(() => {
@@ -49,9 +49,9 @@ describe('MyApp Component', () => {
     localStorage.setItem(THEME_LOCAL_STORAGE_KEY, ThemeEnum.DARK);
 
     render(
-      <MyApp>
+      <Layout>
         <div>Test Child</div>
-      </MyApp>
+      </Layout>
     );
 
     await waitFor(() => {
