@@ -1,16 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Pagination from '../../ui/Pagination/Pagination';
-import { MemoryRouter } from 'react-router';
-import { PAGINATION_LIMIT } from '../../consts';
+import Pagination from '@/components/ui/Pagination/Pagination';
+import { PAGINATION_LIMIT } from '../../../consts';
 
 describe('Pagination', () => {
   const renderWithRouter = (total: number, page: number) => {
-    return render(
-      <MemoryRouter>
-        <Pagination total={total} page={page} />
-      </MemoryRouter>
-    );
+    return render(<Pagination total={total} page={page} />);
   };
 
   it('should render first page correctly', () => {

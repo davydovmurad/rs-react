@@ -1,16 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Pokemon } from '../models';
-import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from '../consts';
 
 export interface PokemonsState {
   list: Pokemon[];
   nameFilter: string;
+  detailsPokemon: Pokemon;
 }
 
 const initialState: PokemonsState = {
   list: [],
-  nameFilter: localStorage.getItem(SEARCH_REQUEST_LOCAL_STORAGE_KEY) || '',
+  nameFilter: '',
+  detailsPokemon: { name: '', description: '' },
 };
 
 export const pokemonsSlice = createSlice({
@@ -31,9 +32,13 @@ export const pokemonsSlice = createSlice({
     updateNameFilter: (state, action: PayloadAction<string>) => {
       state.nameFilter = action.payload;
     },
+    setDetailsPokemon: (state, action: PayloadAction<Pokemon>) => {
+      state.detailsPokemon = action.payload;
+    },
   },
 });
 
-export const { add, remove, clear, updateNameFilter } = pokemonsSlice.actions;
+export const { add, remove, clear, updateNameFilter, setDetailsPokemon } =
+  pokemonsSlice.actions;
 
 export default pokemonsSlice.reducer;

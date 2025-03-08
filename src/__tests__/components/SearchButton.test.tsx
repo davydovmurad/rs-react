@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SearchButton from '../../components/Search/SearchButton/SearchButton';
+import SearchButton from '@/components/Search/SearchButton/SearchButton';
 import { vi } from 'vitest';
 
 describe('SearchButton', () => {

@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import Card from '../../components/Card/Card/Card';
 import { vi } from 'vitest';
-import { add, remove } from '../../store/pokemonSlice';
+import Card from '@/components/Card/Card/Card';
+import { add, remove } from '@/store/pokemonSlice';
 
 const mockStore = configureStore([]);
 

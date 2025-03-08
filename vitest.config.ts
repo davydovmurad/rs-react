@@ -6,6 +6,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    alias: {
+      '@/': new URL('./src/', import.meta.url).pathname,
+    },
     setupFiles: ['./src/__tests__/setup.ts'],
     include: ['./src/__tests__/**/*.{ts,tsx}'],
     exclude: [
@@ -13,8 +16,7 @@ export default defineConfig({
       'var/**',
       '**/dist/**',
       './src/__tests__/setup.ts',
-      './src/main.tsx',
-      './src/App.tsx',
+      './src/pages/_app.tsx',
     ],
     coverage: {
       include: ['**/*.tsx'],
@@ -23,8 +25,7 @@ export default defineConfig({
         '**/*.test.tsx',
         '**/*.spec.tsx',
         'src/__tests__/setup.ts',
-        './src/main.tsx',
-        './src/App.tsx',
+        './src/pages/_app.tsx',
       ],
     },
   },

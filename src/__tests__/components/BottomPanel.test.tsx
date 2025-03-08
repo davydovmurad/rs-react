@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
-import BottomPanel from '../../components/BottomPanel/BottomPanel';
-import { clear } from '../../store/pokemonSlice';
+import BottomPanel from '@/components/BottomPanel/BottomPanel';
+import { clear } from '@/store/pokemonSlice';
 import { Store, UnknownAction } from '@reduxjs/toolkit';
 import { vi } from 'vitest';
 

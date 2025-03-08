@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import Header from '../../components/Header/Header';
-import useSearchRequest from '../../hooks/useSearchRequest';
+import Header from '@/components/Header/Header';
+import useSearchRequest from '@/hooks/useSearchRequest';
 import { MockedFunction, vi } from 'vitest';
 
-vi.mock('../../hooks/useSearchRequest');
+vi.mock('@/hooks/useSearchRequest');
 
 const mockStore = configureStore([]);
 const mockUseSearchRequest = useSearchRequest as MockedFunction<

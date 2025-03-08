@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import ThemeSwitcher from '../../ui/ThemeSwitcher/ThemeSwitcher';
-import ThemeContext, { ThemeEnum } from '../../context/ThemeContext';
+import ThemeSwitcher from '@/components/ui/ThemeSwitcher/ThemeSwitcher';
+import ThemeContext, { ThemeEnum } from '@/context/ThemeContext';
 
 const mockSetTheme = vi.fn();
 const mockLocalStorageSetItem = vi.spyOn(Storage.prototype, 'setItem');

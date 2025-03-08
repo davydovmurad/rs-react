@@ -1,8 +1,8 @@
 import { ComponentProps, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ThemeContext from '../../../context/ThemeContext';
-import { add, remove } from '../../../store/pokemonSlice';
-import { RootState } from '../../../store/store';
+import ThemeContext from '@/context/ThemeContext';
+import { add, remove } from '@/store/pokemonSlice';
+import { RootState } from '@/store/store';
 import { Pokemon } from '../../../models';
 import styles from './Card.module.css';
 
@@ -35,7 +35,7 @@ export default function Card({
   const pokemonNames = pokemons.map((pokemon) => pokemon.name);
 
   return (
-    <tr onClick={onClick} className={styles[theme]}>
+    <tr onClick={onClick} className={[styles.cardRow, styles[theme]].join(' ')}>
       <td>
         <input
           type="checkbox"

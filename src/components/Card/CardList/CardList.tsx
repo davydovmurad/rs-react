@@ -1,28 +1,28 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { useGetAllPokemonsQuery } from '../../../services/pokemon';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { RootState } from '@/store/store';
+import { setDetailsPokemon } from '@/store/pokemonSlice';
+import { useGetAllPokemonsQuery } from '@/services/pokemon';
+import Pagination from '@/components/ui/Pagination/Pagination';
+import Loader from '@/components/ui/Loader/Loader';
 import Card from '../Card/Card';
-import Pagination from '../../../ui/Pagination/Pagination';
-import Loader from '../../../ui/Loader/Loader';
 import { PAGINATION_LIMIT } from '../../../consts';
 import { Pokemon } from '../../../models';
 import styles from './CardList.module.css';
 
 const PAGE_PARAM: string = 'page';
 
-type CardListProps = {
-  setDetailsPokemon: (value: SetStateAction<Pokemon | undefined>) => void;
-};
-
-export default function CardList({ setDetailsPokemon }: CardListProps) {
+export default function CardList() {
+  const dispatch = useDispatch();
   const nameFilter = useSelector(
     (state: RootState) => state.pokemons.nameFilter
   );
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
   const [offset, setOffset] = useState<number>(0);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const pageParam = Number(searchParams.get(PAGE_PARAM));
   const { data, error, isLoading, isFetching } = useGetAllPokemonsQuery({
     nameFilter: nameFilter,
@@ -36,20 +36,19 @@ export default function CardList({ setDetailsPokemon }: CardListProps) {
     details: number,
     pokemon: Pokemon
   ): void => {
-    setDetailsPokemon(pokemon);
-    navigate(`/details?page=${pageParam}&details=${details}`, {
-      replace: true,
-    });
+    dispatch(setDetailsPokemon(pokemon));
+    router.replace(`/details?page=${pageParam}&details=${details}`);
   };
 
   useEffect(() => {
     if (pageParam <= 0) {
-      searchParams.set(PAGE_PARAM, '1');
-      setSearchParams(searchParams);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(PAGE_PARAM, '1');
+      router.push(pathname + '?' + params.toString());
     } else {
       setOffset((pageParam - 1) * PAGINATION_LIMIT);
     }
-  }, [pageParam, searchParams, setSearchParams]);
+  }, [pageParam, pathname, router, searchParams]);
 
   if (error) {
     return <p className={styles.msg}>Failed to fetch</p>;
@@ -65,7 +64,7 @@ export default function CardList({ setDetailsPokemon }: CardListProps) {
             <p className={styles.msg}>List of pokemons is empty</p>
           ) : (
             <>
-              <table>
+              <table className={styles.cardListTable}>
                 <thead>
                   <tr>
                     <th>Checkbox</th>

@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from 'react';
-import ThemeContext, { ThemeEnum } from '../../context/ThemeContext';
-import { THEME_LOCAL_STORAGE_KEY } from '../../consts';
+import ThemeContext, { ThemeEnum } from '@/context/ThemeContext';
+import { THEME_LOCAL_STORAGE_KEY } from '../../../consts';
 import styles from './ThemeSwitcher.module.css';
 
 interface ThemeSwitcherProps {
@@ -29,7 +29,7 @@ export default function ThemeSwitcher({ setTheme }: ThemeSwitcherProps) {
         onChange={(e) => onSwitch(e)}
       />
       <label htmlFor="themeSwitch" className={styles.themeSwitchLabel}>
-        <span>Switch theme</span>
+        <span className={styles.themeSwitchLabelSpan}>Switch theme</span>
       </label>
     </div>
   );

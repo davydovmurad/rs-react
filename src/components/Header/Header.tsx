@@ -5,10 +5,10 @@ import {
   useState,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import useSearchRequest from '../../hooks/useSearchRequest';
-import { updateNameFilter } from '../../store/pokemonSlice';
-import SearchInput from '../Search/SearchInput/SearchInput';
-import SearchButton from '../Search/SearchButton/SearchButton';
+import useSearchRequest from '@/hooks/useSearchRequest';
+import { updateNameFilter } from '@/store/pokemonSlice';
+import SearchInput from '@/components/Search/SearchInput/SearchInput';
+import SearchButton from '@/components/Search/SearchButton/SearchButton';
 import { SEARCH_REQUEST_LOCAL_STORAGE_KEY } from '../../consts';
 import styles from './Header.module.css';
 

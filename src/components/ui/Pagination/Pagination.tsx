@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { PAGINATION_LIMIT } from '../../consts';
-import ThemeContext from '../../context/ThemeContext';
-import { Link } from 'react-router';
+import Link from 'next/link';
+import ThemeContext from '@/context/ThemeContext';
+import { PAGINATION_LIMIT } from '../../../consts';
 import styles from './Pagination.module.css';
 
 type PaginationProps = {
@@ -31,18 +31,17 @@ export default function Pagination({ total, page }: PaginationProps) {
           }
         >
           <Link
-            to="/?page=1"
+            href="/?page=1"
             className={styles.link}
             onClick={(e) => e.stopPropagation()}
           >
             ←
           </Link>
         </li>
-
         {numLinkList.map((num) => (
           <li key={num} className={num === page ? styles.active : ''}>
             <Link
-              to={`/?page=${num}`}
+              href={`/?page=${num}`}
               className={styles.link}
               onClick={(e) => e.stopPropagation()}
             >
@@ -50,7 +49,6 @@ export default function Pagination({ total, page }: PaginationProps) {
             </Link>
           </li>
         ))}
-
         <li
           className={
             page === pagesCount
@@ -59,7 +57,7 @@ export default function Pagination({ total, page }: PaginationProps) {
           }
         >
           <Link
-            to={`/?page=${pagesCount}`}
+            href={`/?page=${pagesCount}`}
             className={styles.link}
             onClick={(e) => e.stopPropagation()}
           >

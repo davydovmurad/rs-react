@@ -1,5 +1,5 @@
 import { ComponentProps, useContext } from 'react';
-import ThemeContext from '../../../context/ThemeContext';
+import ThemeContext from '@/context/ThemeContext';
 import styles from './SearchInput.module.css';
 
 export default function SearchInput(props: ComponentProps<'input'>) {

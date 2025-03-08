@@ -67,14 +67,14 @@
     color: lightSlateGray;
   }
 
-  span {
+  .themeSwitchLabelSpan {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 0;
     width: 100%;
   }
 
-  span::after {
+  .themeSwitchLabelSpan::after {
     position: absolute;
     top: calc(100% + 15px);
     left: 5px;
@@ -101,7 +101,7 @@
     color: turquoise;
   }
 
-  span::after {
+  .themeSwitchLabelSpan::after {
     transform: translate3d(70px, 0, 0);
   }
 }

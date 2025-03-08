@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ThemeContext from '../../context/ThemeContext';
-import { RootState } from '../../store/store';
-import { clear } from '../../store/pokemonSlice';
+import ThemeContext from '@/context/ThemeContext';
+import { RootState } from '@/store/store';
+import { clear } from '@/store/pokemonSlice';
 import styles from './BottomPanel.module.css';
 
 export default function BottomPanel() {
