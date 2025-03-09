@@ -23,3 +23,7 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# React Router
+/.react-router/
+/build/
