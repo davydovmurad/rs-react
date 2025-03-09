@@ -1,0 +1,20 @@
+.name {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #0055cc;
+}
+
+.cardRow:hover td {
+  background-color: #ffcc00 !important;
+  cursor: pointer;
+}
+
+.cardRow input[type='checkbox'] {
+  width: 30px;
+  height: 30px;
+}
+
+.cardRow.dark td {
+  background-color: #333 !important;
+  color: #fff;
+}
