@@ -1,0 +1,15 @@
+.link {
+  display: inline-block;
+  background: wheat;
+  text-decoration: none;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.link:hover {
+  background: lightblue;
+}

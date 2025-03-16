@@ -1,0 +1,24 @@
+.homeTable {
+  width: 100%;
+  background: white;
+}
+
+.homeTable,
+.homeTable th,
+.homeTable td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.homeTable th,
+.homeTable td {
+  padding: 10px;
+}
+
+.homeTable td img {
+  width: 200px;
+}
+
+.isNew {
+  background: lightgreen;
+}
