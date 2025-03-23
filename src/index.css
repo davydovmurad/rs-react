@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: tan;
+  margin: 20px 200px;
+  text-align: center;
+}
