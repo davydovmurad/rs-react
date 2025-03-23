@@ -1,0 +1,15 @@
+.controls {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.controls label {
+  margin-right: 20px;
+}
+
+.controls input,
+.controls select {
+  width: 200px;
+  margin-left: 5px;
+}
